@@ -99,13 +99,6 @@ public class TravelPayment {
 	public func GetLastPaymentCal() -> Int32 {
 		return this.m_lastPaymentCal;
 	}
-	
-	protected cb func OnLoadingScreenFinished(value: Bool) -> Bool {
-		if value && this.scheduleMSG {
-			FasttcSG.ShowFastTravelPaidMessage(this.m_player.GetGame(), this.m_lastPaymentCal);
-			this.scheduleMSG = false;
-		};
-	}
 }
 
 @wrapMethod(WorldMapTooltipController)
@@ -173,21 +166,4 @@ protected cb func OnDetach() -> Bool {
 
 	this.m_TravelPayment.Uninit();
     this.m_TravelPayment = null;
-}
-
-@wrapMethod(FastTravelSystem)
-private final func RequestAutoSaveWithDelay() -> Void {
-	let Config = new WarpConfig();
-    if Config.DisableAfterFastTravel {
-        return;
-    };
-    wrappedMethod();
-}
-@wrapMethod(FastTravelSystem)
-private final func RequestAutoSave() -> Void {
-	let Config = new WarpConfig();
-    if Config.DisableAfterFastTravel {
-        return;
-    };
-    wrappedMethod();
 }
